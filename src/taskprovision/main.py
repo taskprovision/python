@@ -12,9 +12,10 @@ from typing import Dict, Any
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.security import HTTPBearer
 import uvicorn
+from typing import Dict, Any
 
 from .config.settings import get_settings
 from .api import auth, projects, generation, billing
@@ -267,6 +268,11 @@ async def repo_health_checker():
     </html>
     """)
 
+
+@app.get("/api/test", response_model=Dict[str, str])
+async def test_endpoint():
+    """Test endpoint to verify API is working"""
+    return {"status": "success", "message": "TaskProvision API is running!"}
 
 if __name__ == "__main__":
     uvicorn.run(

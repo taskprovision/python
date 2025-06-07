@@ -4,6 +4,11 @@ package-lock.json
 yarn.lock
 accounts.toml
 package-lock.json
+tasksprovision.*
+taskprovision.*
+pyproject.toml.backup
+.backup
+.bak
 venv
 .db
 .TODO.txt

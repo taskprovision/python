@@ -1,4 +1,24 @@
-# python
+<div align="center">
+
+# TaskProvision
+
+[![PyPI Version](https://img.shields.io/pypi/v/taskprovision.svg)](https://pypi.org/project/taskprovision/)
+[![Python Version](https://img.shields.io/pypi/pyversions/taskprovision.svg)](https://pypi.org/project/taskprovision/)
+[![License](https://img.shields.io/pypi/l/taskprovision.svg)](https://github.com/softreck/taskprovision/blob/main/LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/softreck/taskprovision/tests.yml?branch=main&label=tests)](https://github.com/softreck/taskprovision/actions)
+[![Code Coverage](https://img.shields.io/codecov/c/github/softreck/taskprovision?label=coverage)](https://codecov.io/gh/softreck/taskprovision)
+[![Documentation Status](https://img.shields.io/readthedocs/taskprovision/latest?label=docs)](https://taskprovision.readthedocs.io/)
+[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Code Quality](https://img.shields.io/lgtm/grade/python/github/softreck/taskprovision.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/softreck/taskprovision/context:python)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/softreck/taskprovision.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/softreck/taskprovision/alerts/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/taskprovision.svg?color=blue)](https://pypistats.org/packages/taskprovision)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
+</div>
+
 TaskProvision - AI-Powered Development Automation Platform
 
 # 🚀 WronAI AutoDev - AI-Powered Development Automation Platform
@@ -93,78 +113,6 @@ def create_personalized_demo(github_repo):
 ```
 
 ## 🛠️ VPS Setup & Infrastructure
-
-### Kubernetes Setup Script (8GB VPS)
-```bash
-#!/bin/bash
-# setup_wronai_infrastructure.sh
-
-# 1. Install Docker & Kubernetes
-curl -fsSL https://get.docker.com | sh
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
-apt-get update && apt-get install -y kubelet kubeadm kubectl
-
-# 2. Initialize single-node cluster
-kubeadm init --pod-network-cidr=10.244.0.0/16
-export KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-kubectl taint nodes --all node-role.kubernetes.io/master-
-
-# 3. Deploy WronAI Platform
-cat <<EOF | kubectl apply -f -
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: wronai-autodev
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wronai-autodev
-  template:
-    metadata:
-      labels:
-        app: wronai-autodev
-    spec:
-      containers:
-      - name: wronai-api
-        image: python:3.11-slim
-        ports:
-        - containerPort: 8000
-        env:
-        - name: OLLAMA_HOST
-          value: "ollama-service:11434"
-        command: ["/bin/bash"]
-        args: ["-c", "pip install fastapi uvicorn && python -c 'print(\"WronAI AutoDev API Started\")' && sleep infinity"]
-      - name: ollama
-        image: ollama/ollama:latest
-        ports:
-        - containerPort: 11434
-        resources:
-          requests:
-            memory: "2Gi"
-          limits:
-            memory: "4Gi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wronai-service
-spec:
-  selector:
-    app: wronai-autodev
-  ports:
-  - port: 80
-    targetPort: 8000
-  type: LoadBalancer
-EOF
-
-echo "✅ WronAI AutoDev Platform deployed!"
-echo "🌐 Access at: http://$(kubectl get svc wronai-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
-```
 
 ### Application Stack
 ```python

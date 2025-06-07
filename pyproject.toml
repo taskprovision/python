@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "taskprovision"
-version = "0.1.2"
+version = "0.1.6"
 description = "AI-Powered Development Automation Platform"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -41,7 +41,7 @@ requires-python = ">=3.8"
 
 [tool.poetry]
 name = "taskprovision"
-version = "0.1.2"
+version = "0.1.6"
 description = "AI-Powered Development Automation Platform"
 authors = ["TaskProvision Team <info@softreck.dev>"]
 maintainers = ["TaskProvision Team <info@softreck.dev>"]

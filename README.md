@@ -19,6 +19,80 @@
 
 </div>
 
+TaskProvision is an AI-Powered Development Automation Platform that helps developers automate repetitive tasks, generate high-quality code, and maintain code quality standards.
+
+## 🚀 Features
+
+- AI-powered code generation
+- Automated code quality checks
+- Task management and automation
+- Integration with popular development tools
+- Extensible architecture
+
+## 📦 Installation
+
+### Using pip
+```bash
+pip install taskprovision
+```
+
+### From source
+```bash
+git clone https://github.com/taskprovision/python.git
+cd python
+pip install -e .[dev]
+```
+
+## 🛠️ Development Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/taskprovision/python.git
+   cd python
+   ```
+
+2. Set up a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install development dependencies:
+   ```bash
+   pip install -e .[dev]
+   ```
+
+4. Install pre-commit hooks:
+   ```bash
+   pre-commit install
+   ```
+
+## 🧪 Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run tests with coverage
+pytest --cov=taskprovision --cov-report=term-missing
+```
+
+## 📚 Documentation
+
+Documentation is available at [taskprovision.readthedocs.io](https://taskprovision.readthedocs.io/).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📄 License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+For support, please open an [issue](https://github.com/taskprovision/python/issues) or email info@softreck.dev.
+
 TaskProvision - AI-Powered Development Automation Platform
 
 # 🚀 WronAI AutoDev - AI-Powered Development Automation Platform

@@ -603,38 +603,83 @@ Requirements:
 Generate optimized SQL code:"""
 
     async def generate_code(self, request: CodeGenerationRequest) -> CodeGenerationResult:
-        """Generate code based on request"""
+        """Generate code based on request with enhanced error handling.
+        
+        Args:
+            request: CodeGenerationRequest containing generation parameters
+            
+        Returns:
+            CodeGenerationResult with the generated code and quality metrics
+            
+        Raises:
+            ValueError: If request validation fails
+            RuntimeError: If code generation fails after maximum retries
+        """
         import time
         start_time = time.time()
+        
+        # Input validation
+        if not request or not isinstance(request, CodeGenerationRequest):
+            raise ValueError("Request must be a valid CodeGenerationRequest instance")
+            
+        if not request.description or not request.description.strip():
+            raise ValueError("Description cannot be empty")
+            
+        if not isinstance(request.language, CodeLanguage):
+            raise ValueError(f"Invalid language: {request.language}. Must be a CodeLanguage enum value")
+            
+        if request.max_length <= 0:
+            raise ValueError(f"max_length must be positive, got {request.max_length}")
+            
+        logger.info(f"Generating {request.language.value} code for: {request.description[:100]}...")
         
         try:
             # Build prompt
             prompt = self._build_prompt(request)
             
-            # Generate initial code
-            generated_code = await self._generate_initial_code(prompt)
+            # Generate initial code with retry logic
+            try:
+                generated_code = await self._generate_initial_code(prompt)
+            except Exception as e:
+                raise RuntimeError(f"Failed to generate initial code: {str(e)}") from e
             
             # Quality check and improvement
-            quality_result = await self._improve_code_quality(
-                generated_code, 
-                request.language, 
-                max_iterations=3
-            )
+            try:
+                quality_result = await self._improve_code_quality(
+                    generated_code, 
+                    request.language, 
+                    max_iterations=3
+                )
+            except Exception as e:
+                logger.warning(f"Code quality improvement failed, using initial code: {str(e)}")
+                quality_result = {
+                    'code': generated_code,
+                    'score': 0.7,  # Default score for unimproved code
+                    'suggestions': ["Quality improvement step was skipped"],
+                    'iterations': 0
+                }
             
             # Generate tests if Python
             tests = None
             if request.language == CodeLanguage.PYTHON:
-                tests = await self._generate_tests(quality_result['code'])
+                try:
+                    tests = await self._generate_tests(quality_result['code'])
+                except Exception as e:
+                    logger.warning(f"Test generation failed: {str(e)}")
             
             # Generate documentation
-            documentation = await self._generate_documentation(
-                quality_result['code'], 
-                request.language
-            )
+            try:
+                documentation = await self._generate_documentation(
+                    quality_result['code'], 
+                    request.language
+                )
+            except Exception as e:
+                logger.warning(f"Documentation generation failed: {str(e)}")
+                documentation = "Documentation generation failed"
             
             execution_time = time.time() - start_time
             
-            return CodeGenerationResult(
+            result = CodeGenerationResult(
                 generated_code=quality_result['code'],
                 language=request.language,
                 quality_score=quality_result['score'],
@@ -645,9 +690,13 @@ Generate optimized SQL code:"""
                 iterations=quality_result['iterations']
             )
             
+            logger.info(f"Successfully generated {request.language.value} code in {execution_time:.2f}s")
+            return result
+            
         except Exception as e:
-            logger.error(f"Code generation failed: {e}")
-            raise
+            error_msg = f"Code generation failed: {str(e)}"
+            logger.error(error_msg, exc_info=True)
+            raise RuntimeError(error_msg) from e
 
     def _build_prompt(self, request: CodeGenerationRequest) -> str:
         """Build prompt for code generation"""

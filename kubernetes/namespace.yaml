@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: taskprovision
+  labels:
+    name: taskprovision
+    app: taskprovision
+    version: "1.0.0"
+  annotations:
+    description: "TaskProvision AI-Powered Development Automation Platform"

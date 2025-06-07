@@ -1,0 +1,78 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taskprovision-ingress
+  namespace: taskprovision
+  labels:
+    app: taskprovision
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+spec:
+  tls:
+  - hosts:
+    - taskprovision.com
+    - api.taskprovision.com
+    secretName: taskprovision-tls
+  rules:
+  - host: taskprovision.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: taskprovision-service
+            port:
+              number: 80
+  - host: api.taskprovision.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: taskprovision-service
+            port:
+              number: 80
+
+---
+# Internal services ingress for development
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taskprovision-internal-ingress
+  namespace: taskprovision
+  labels:
+    app: taskprovision
+    env: development
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: taskprovision-service
+            port:
+              number: 80
+  - host: ollama.localhost
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ollama-service
+            port:
+              number: 11434

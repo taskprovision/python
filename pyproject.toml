@@ -14,13 +14,7 @@ authors = [
 maintainers = [
     {name = "TaskProvision Team", email = "info@softreck.dev"}
 ]
-
-[project.urls]
-Homepage = "https://github.com/taskprovision/www"
-Documentation = "https://github.com/taskprovision/python/docs"
-Repository = "https://github.com/taskprovision/python"
-Changelog = "https://github.com/taskprovision/python/blob/main/CHANGELOG.md"
-Tracker = "https://github.com/taskprovision/python/issues"
+requires-python = ">=3.8"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -44,7 +38,15 @@ keywords = [
     "quality-assurance", "task-management", "llm", "fastapi",
     "kubernetes", "devops", "productivity", "sales-automation"
 ]
-requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/taskprovision/www"
+Documentation = "https://taskprovision.readthedocs.io/"
+Repository = "https://github.com/taskprovision/python"
+Changelog = "https://github.com/taskprovision/python/blob/main/CHANGELOG.md"
+Tracker = "https://github.com/taskprovision/python/issues"
+Source = "https://github.com/taskprovision/python"
+Download = "https://pypi.org/project/taskprovision/"
 
 [tool.poetry]
 name = "taskprovision"

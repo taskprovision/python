@@ -145,6 +145,5 @@ setup(
     download_url="https://github.com/taskprovision/python/archive/refs/heads/main.zip",
 
     # Additional metadata for better discoverability
-    obsoletes=["wronai-taskguard", "wronai-ellma", "wronai-gollm"],
-    provides=["taskprovision"],
+    provides=['taskprovision'],
 )

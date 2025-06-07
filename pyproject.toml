@@ -1,139 +1,222 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "taskprovision"
-version = "0.1.5"
-dynamic = ["version"]
+version = "0.1.1"
 description = "AI-Powered Development Automation Platform"
 authors = ["Tom Sapletta <info@softreck.dev>"]
-readme = "README.md"
+maintainers = ["TaskProvision Team <info@softreck.dev>"]
 license = "Apache-2.0"
-homepage = "https://github.com/taskprovision/python"
-repository = "https://github.com/taskprovision/python"
-documentation = "https://taskprovision.github.io/python"
-keywords = ["ai", "architecture", "llm", "ollama", "solution-generator", "mistral"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+pydantic = "^2.4.0"
+pydantic-settings = "^2.0.3"
+sqlalchemy = "^2.0.0"
+alembic = "^1.12.0"
+redis = "^5.0.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.6"
+httpx = "^0.25.0"
+aiohttp = "^3.8.0"
+openai = "^1.3.0"
+anthropic = "^0.7.0"
+ollama = "^0.1.0"
+celery = "^5.3.0"
+prometheus-client = "^0.19.0"
+structlog = "^23.2.0"
+sentry-sdk = {extras = ["fastapi"], version = "^1.38.0"}
+emails = "^0.6"
+jinja2 = "^3.1.0"
+python-dotenv = "^1.0.0"
+click = "^8.1.0"
+typer = "^0.9.0"
+rich = "^13.6.0"
+PyGithub = "^1.59.0"
+stripe = "^7.0.0"
+python-magic = "^0.4.27"
+Pillow = "^10.0.0"
+python-dateutil = "^2.8.2"
+pytz = "^2023.3"
+marshmallow = "^3.20.0"
+jsonschema = "^4.19.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
+pytest-xdist = "^3.3.0"
+black = "^23.9.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+mypy = "^1.6.0"
+bandit = "^1.7.5"
+safety = "^2.3.0"
+pre-commit = "^3.5.0"
+ipython = "^8.16.0"
+ipdb = "^0.13.13"
+watchdog = "^3.0.0"
+mkdocs = "^1.5.0"
+mkdocs-material = "^9.4.0"
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+mkdocs-awesome-pages-plugin = "^2.9.0"
+httpx = "^0.25.0"
+fakeredis = "^2.20.0"
+prometheus-client = "^0.19.0"
+sentry-sdk = {extras = ["fastapi"], version = "^1.38.0"}
+py-spy = "^0.3.14"
+memory-profiler = "^0.61.0"
+
+[project]
+name = "taskprovision"
+version = "0.1.1"
+description = "AI-Powered Development Automation Platform"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Tom Sapletta", email = "info@softreck.dev"}
+]
+maintainers = [
+    {name = "TaskProvision Team", email = "info@softreck.dev"}
+]
+keywords = [
+    "ai", "automation", "development", "code-generation",
+    "quality-assurance", "task-management", "llm", "fastapi"
+]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "Intended Audience :: System Administrators",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Quality Assurance",
     "License :: OSI Approved :: Apache Software License",
-    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Code Generators",
-    "Topic :: System :: Systems Administration",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent"
 ]
-packages = [{include = "taskprovision", from = "src"}]
-
-[tool.poetry.dependencies]
-python = ">=3.9,<4.0"
-requests = "^2.31.0"
-pydantic = "^2.5.0"
-click = "^8.1.7"
-rich = "^13.7.0"
-pyyaml = "^6.0.1"
-tabulate = "^0.9.0"
-jinja2 = "^3.1.2"
-pathlib = "^1.0.1"
-dataclasses-json = "^0.6.3"
-typing-extensions = "^4.8.0"
-python-dotenv = "^1.0.0"
-python-multipart = "^0.0.6"
-fastapi = {version = "^0.104.0", optional = true}
-uvicorn = {version = "^0.24.0", optional = true}
-mkdocs-material = {extras = ["imaging"], version = "^9.6.14"}
-mkdocs-material-extensions = "^1.3.1"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.3"
-pytest-cov = "^4.1.0"
-pytest-mock = "^3.12.0"
-black = "^23.11.0"
-flake8 = "^6.1.0"
-mypy = "^1.7.1"
-isort = "^5.12.0"
-pre-commit = "^3.6.0"
-sphinx = "^7.2.6"
-sphinx-rtd-theme = "^1.3.0"
-mkdocs = "^1.5.3"
-mkdocs-material = "^9.4.8"
-jupyterlab = "^4.0.9"
-ipython = "^8.17.2"
-
-[tool.poetry.group.test.dependencies]
-pytest-asyncio = "^0.21.1"
-pytest-xdist = "^3.5.0"
-pytest-benchmark = "^4.0.0"
-responses = "^0.24.1"
-factory-boy = "^3.3.0"
-faker = "^20.1.0"
-freezegun = "^1.2.2"
-
-[tool.poetry.group.docs.dependencies]
-mkdocs = "^1.5.3"
-mkdocs-material = "^9.4.8"
-mkdocstrings = {extras = ["python"], version = "^0.29.1"}
-mkdocs-material-extensions = "^1.3.1"
-mkdocs-minify-plugin = "^0.8.0"
-
-[tool.poetry.scripts]
-taskprovision = "taskprovision.cli:cli"
-taskprovision-shell = "taskprovision.cli:shell"
-
-[tool.poetry.extras]
-cli = [
-    "click",
-    "rich",
-    "tabulate",
-    "pyyaml",
-    "python-dotenv",
-    "python-multipart"
+requires-python = ">=3.8"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.4.0",
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.12.0",
+    "asyncpg>=0.29.0",
+    "redis>=5.0.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-multipart>=0.0.6",
+    "httpx>=0.25.0",
+    "aiohttp>=3.8.0",
+    "openai>=1.3.0",
+    "anthropic>=0.7.0",
+    "ollama>=0.1.0",
+    "celery>=5.3.0",
+    "prometheus-client>=0.19.0",
+    "structlog>=23.2.0",
+    "sentry-sdk[fastapi]>=1.38.0",
+    "emails>=0.6",
+    "jinja2>=3.1.0",
+    "python-dotenv>=1.0.0",
+    "click>=8.1.0",
+    "typer>=0.9.0",
+    "rich>=13.6.0",
+    "PyGithub>=1.59.0",
+    "stripe>=7.0.0",
+    "python-magic>=0.4.27",
+    "Pillow>=10.0.0",
+    "python-dateutil>=2.8.2",
+    "pytz>=2023.3",
+    "marshmallow>=3.20.0",
+    "jsonschema>=4.19.0",
 ]
-server = [
-    "fastapi",
-    "uvicorn"
-]
-visualization = [
-    "matplotlib",
-    "plotly",
-    "graphviz"
-]
-export = [
-    "jinja2",
-    "markdown",
-    "pandoc"
-]
-cloud = [
-    "boto3",
-    "azure-storage-blob",
-    "google-cloud-storage"
-]
+
+[project.optional-dependencies]
 dev = [
-    "pytest",
-    "pytest-cov",
-    "pytest-mock",
-    "black",
-    "flake8",
-    "mypy",
-    "isort",
-    "pre-commit",
-    "sphinx",
-    "sphinx-rtd-theme",
-    "mkdocs",
-    "mkdocs-material"
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.3.0",
+    "black>=23.9.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.6.0",
+    "bandit>=1.7.5",
+    "safety>=2.3.0",
+    "pre-commit>=3.5.0",
+    "ipython>=8.16.0",
+    "ipdb>=0.13.13",
+    "watchdog>=3.0.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocstrings[python]>=0.24.0",
+    "mkdocs-awesome-pages-plugin>=2.9.0",
+]
+test = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.25.0",
+    "fakeredis>=2.20.0",
+]
+monitoring = [
+    "prometheus-client>=0.19.0",
+    "sentry-sdk[fastapi]>=1.38.0",
+    "py-spy>=0.3.14",
+    "memory-profiler>=0.61.0",
+]
+all = [
+    "taskprovision[dev,docs,test,monitoring]"
 ]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[project.urls]
+Homepage = "https://github.com/taskprovision/www"
+Documentation = "https://github.com/taskprovision/python/docs"
+Repository = "https://github.com/taskprovision/python"
+Issues = "https://github.com/taskprovision/taskprovision/issues"
+Changelog = "https://github.com/taskprovision/taskprovision/blob/main/CHANGELOG.md"
 
-# Tool configurations
+[project.scripts]
+taskprovision = "taskprovision.cli:main"
+tprov = "taskprovision.cli:main"
+taskprov = "taskprovision.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "taskprovision.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["taskprovision*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+taskprovision = [
+    "templates/*.html",
+    "templates/*.txt",
+    "static/css/*.css",
+    "static/js/*.js",
+    "static/images/*",
+    "config/*.yaml",
+    "config/*.json",
+]
+
+# Black configuration
 [tool.black]
 line-length = 88
-target-version = ['py38', 'py39', 'py310', 'py311', 'py312', 'py313', 'py314']
+target-version = ['py38']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
@@ -149,13 +232,17 @@ extend-exclude = '''
 )/
 '''
 
+# isort configuration
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
 line_length = 88
-known_first_party = ["taskprovision"]
-known_third_party = ["click", "rich", "pydantic", "requests"]
 
+# mypy configuration
 [tool.mypy]
 python_version = "3.8"
 warn_return_any = true
@@ -172,26 +259,35 @@ warn_unreachable = true
 strict_equality = true
 
 [[tool.mypy.overrides]]
-module = "tests.*"
-disallow_untyped_defs = false
+module = [
+    "ollama.*",
+    "redis.*",
+    "celery.*",
+    "stripe.*",
+    "emails.*",
+]
+ignore_missing_imports = true
 
+# pytest configuration
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "-v --import-mode=importlib --strict-markers --strict-config --doctest-modules --cov=taskprovision --cov-report=term-missing --cov-report=xml --cov-fail-under=80"
-norecursedirs = [".git", ".tox", ".mypy_cache", ".pytest_cache", "__pycache__", "build", "dist"]
-filterwarnings = ["error", "ignore::DeprecationWarning"]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
 
+# Coverage configuration
 [tool.coverage.run]
-source = ["src"]
+source = ["src/taskprovision"]
 omit = [
     "*/tests/*",
     "*/test_*",
-    "*/__init__.py",
     "*/conftest.py",
-    "*/setup.py",
 ]
 
 [tool.coverage.report]
@@ -204,40 +300,6 @@ exclude_lines = [
     "raise NotImplementedError",
     "if 0:",
     "if __name__ == .__main__.:",
-    "class .*\\bProtocol\\):",
+    "class .*\\b\\):",
     "@(abc\\.)?abstractmethod",
 ]
-
-[tool.flake8]
-max-line-length = 88
-extend-ignore = [
-    "E203",  # whitespace before ':'
-    "E501",  # line too long (black handles this)
-    "W503",  # line break before binary operator
-]
-exclude = [
-    ".git",
-    "__pycache__",
-    "build",
-    "dist",
-    ".venv",
-    ".eggs",
-    "*.egg-info",
-]
-per-file-ignores = [
-    "__init__.py:F401",
-    "tests/*:S101,S105,S106",
-]
-
-
-
-# Additional project metadata
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/taskprovision/python/issues"
-"Changelog" = "https://github.com/taskprovision/python/blob/main/CHANGELOG.md"
-"Discussions" = "https://github.com/taskprovision/python/discussions"
-"Documentation" = "https://taskprovision.github.io/python"
-
-# Custom build configuration
-[tool.poetry.build]
-generate-setup-file = false

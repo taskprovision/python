@@ -1,3 +1,16 @@
+.idea
+poetry.lock
+package-lock.json
+yarn.lock
+accounts.toml
+package-lock.json
+venv
+.db
+.TODO.txt
+*.log
+__pycache__/
+*.py[cod]
+*$py.class
 # Logs
 logs
 *.log
@@ -103,12 +116,6 @@ dist
 # vuepress v2.x temp and cache directory
 .temp
 .cache
-
-# vitepress build output
-**/.vitepress/dist
-
-# vitepress cache directory
-**/.vitepress/cache
 
 # Docusaurus cache and generated files
 .docusaurus

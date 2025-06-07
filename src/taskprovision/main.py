@@ -1,0 +1,5 @@
+# FastAPI application
+"""
+main.py
+"""
+

@@ -14,6 +14,13 @@ authors = [
 maintainers = [
     {name = "TaskProvision Team", email = "info@softreck.dev"}
 ]
+
+[project.urls]
+Homepage = "https://github.com/taskprovision/www"
+Documentation = "https://github.com/taskprovision/python/docs"
+Repository = "https://github.com/taskprovision/python"
+Changelog = "https://github.com/taskprovision/python/blob/main/CHANGELOG.md"
+Tracker = "https://github.com/taskprovision/python/issues"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

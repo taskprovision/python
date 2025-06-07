@@ -7,6 +7,9 @@ package-lock.json
 tasksprovision.*
 taskprovision.*
 pyproject.toml.backup
+wheel
+.venv
+.env
 .backup
 .bak
 venv

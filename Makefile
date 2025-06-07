@@ -240,8 +240,6 @@ help:  ## Show this help message
 ##@ Phony Targets
 .PHONY: setup-env install install-dev test test-cov lint format docs serve-docs \
         build publish docker-up docker-down docker-logs clean clean-all help
-publish: build
-	$(POETRY) publish
 
 # Generate documentation
 docs:
